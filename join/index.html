@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>팀 초대 · Offcourse</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1.8rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-align: center;
+    margin: 8px 0 4px;
+    word-break: break-all;
+  }
+  .steps { counter-reset: step; list-style: none; padding: 0; }
+  .steps li { counter-increment: step; padding-left: 34px; position: relative; margin-bottom: 10px; }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 1px;
+    width: 24px; height: 24px; border-radius: 12px;
+    background: var(--accent); color: #fff;
+    font-size: 0.8rem; font-weight: 700;
+    display: grid; place-items: center;
+  }
+  .copy {
+    display: block; width: 100%; margin-top: 12px; padding: 12px;
+    background: var(--accent); color: #fff; border: 0; border-radius: 10px;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>팀에 초대되었어요</h1>
+<p class="meta">Offcourse에서 함께 여행을 준비해보세요.</p>
+
+<div class="card">
+  <p style="margin:0; color:var(--text-soft); font-size:0.85rem; text-align:center;">초대 코드</p>
+  <div class="code" id="code">—</div>
+  <button class="copy" id="copy" type="button">코드 복사하기</button>
+</div>
+
+<h2>참여 방법</h2>
+<ol class="steps">
+  <li>App Store에서 <strong>Offcourse</strong> 앱을 설치합니다.</li>
+  <li>앱을 실행하고 로그인합니다.</li>
+  <li>홈에서 <strong>초대 코드로 참여</strong>를 선택하고 위 코드를 입력합니다.</li>
+</ol>
+
+<p style="margin-top:28px;">
+  <a href="../privacy/">개인정보 처리방침</a> · <a href="../terms/">이용약관</a>
+</p>
+
+<footer>Offcourse</footer>
+</main>
+<script>
+  // 초대 링크는 ?code=XXXX 형태다. GitHub Pages는 정적 호스팅이라 /join/XXXX 경로 라우팅을
+  // 할 수 없어서 쿼리스트링을 쓴다.
+  var code = new URLSearchParams(location.search).get('code');
+  var codeEl = document.getElementById('code');
+  var copyEl = document.getElementById('copy');
+  if (code) {
+    codeEl.textContent = code;
+  } else {
+    codeEl.textContent = '코드 없음';
+    copyEl.disabled = true;
+    copyEl.style.opacity = '0.4';
+  }
+  copyEl.addEventListener('click', function () {
+    if (!code) return;
+    navigator.clipboard.writeText(code).then(function () {
+      copyEl.textContent = '복사했어요';
+      setTimeout(function () { copyEl.textContent = '코드 복사하기'; }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
