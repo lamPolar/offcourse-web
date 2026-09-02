@@ -25,6 +25,13 @@
     font-size: 0.8rem; font-weight: 700;
     display: grid; place-items: center;
   }
+  .open-app {
+    display: block; text-align: center; text-decoration: none;
+  }
+  .secondary {
+    background: var(--surface); color: var(--accent);
+    border: 1px solid var(--accent);
+  }
   .copy {
     display: block; width: 100%; margin-top: 12px; padding: 12px;
     background: var(--accent); color: #fff; border: 0; border-radius: 10px;
@@ -41,14 +48,15 @@
 <div class="card">
   <p style="margin:0; color:var(--text-soft); font-size:0.85rem; text-align:center;">초대 코드</p>
   <div class="code" id="code">—</div>
-  <button class="copy" id="copy" type="button">코드 복사하기</button>
+  <a class="copy open-app" id="openApp" href="#">앱에서 열기</a>
+  <button class="copy secondary" id="copy" type="button">코드 복사하기</button>
 </div>
 
 <h2>참여 방법</h2>
 <ol class="steps">
-  <li>App Store에서 <strong>Offcourse</strong> 앱을 설치합니다.</li>
-  <li>앱을 실행하고 로그인합니다.</li>
-  <li>홈에서 <strong>초대 코드로 참여</strong>를 선택하고 위 코드를 입력합니다.</li>
+  <li><strong>앱에서 열기</strong>를 누르면 바로 초대 화면으로 갑니다.</li>
+  <li>앱이 없다면 App Store에서 <strong>Offcourse</strong>를 설치하세요.</li>
+  <li>설치 후 <strong>처음 실행할 때</strong> 복사해 둔 코드를 붙여넣을 수 있어요.</li>
 </ol>
 
 <p style="margin-top:28px;">
@@ -69,6 +77,12 @@
     codeEl.textContent = '코드 없음';
     copyEl.disabled = true;
     copyEl.style.opacity = '0.4';
+  }
+  var openEl = document.getElementById('openApp');
+  if (code) {
+    openEl.href = 'offcourse://invite/' + encodeURIComponent(code);
+  } else {
+    openEl.style.display = 'none';
   }
   copyEl.addEventListener('click', function () {
     if (!code) return;
