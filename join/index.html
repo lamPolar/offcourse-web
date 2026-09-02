@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>팀 초대 · Offcourse</title>
 <link rel="stylesheet" href="../style.css">
+<!-- 사파리 상단 "열기" 배너. app-argument 로 현재 주소를 넘기면 앱이 코드를 그대로
+     읽는다. 스크립트로 넣는 이유는 코드가 쿼리에 있어 정적으로 쓸 수 없기 때문이다. -->
+<script>
+  (function () {
+    var meta = document.createElement('meta');
+    meta.name = 'apple-itunes-app';
+    meta.content = 'app-id=6805121804, app-argument=' + window.location.href;
+    document.head.appendChild(meta);
+  })();
+</script>
 <style>
   .code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
