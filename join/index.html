@@ -16,14 +16,13 @@
   })();
 </script>
 <style>
-  .code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 1.8rem;
-    letter-spacing: 0.12em;
-    font-weight: 700;
-    text-align: center;
-    margin: 8px 0 4px;
-    word-break: break-all;
+  .logo {
+    display: block; width: 160px; max-width: 55%; height: auto;
+    margin: 0 0 20px;
+  }
+  .notice {
+    margin: 0; text-align: center;
+    color: var(--text-soft); font-size: 0.9rem;
   }
   .steps { counter-reset: step; list-style: none; padding: 0; }
   .steps li { counter-increment: step; padding-left: 34px; position: relative; margin-bottom: 10px; }
@@ -48,20 +47,20 @@
 </head>
 <body>
 <main>
+<img class="logo" src="../img/logo.png" alt="Offcourse" width="720" height="232">
 <h1>팀에 초대되었어요</h1>
 <p class="meta">Offcourse에서 함께 여행을 준비해보세요.</p>
 
 <div class="card">
-  <p style="margin:0; color:var(--text-soft); font-size:0.85rem; text-align:center;">초대 코드</p>
-  <div class="code" id="code">—</div>
   <a class="copy open-app" id="openApp" href="#">앱에서 열기</a>
+  <p class="notice" id="notice" hidden>초대 코드가 없는 링크예요. 초대한 사람에게 링크를 다시 받아주세요.</p>
 </div>
 
 <h2>참여 방법</h2>
 <ol class="steps">
   <li><strong>앱에서 열기</strong>를 누르면 바로 초대 화면으로 갑니다.</li>
   <li>앱이 없다면 App Store에서 <strong>Offcourse</strong>를 설치하세요.</li>
-  <li>설치 후 <strong>처음 실행할 때</strong> 위 초대 코드를 입력하면 참여할 수 있어요.</li>
+  <li>설치한 뒤 <strong>초대 링크를 다시 열면</strong> 바로 참여할 수 있어요.</li>
 </ol>
 
 <p style="margin-top:28px;">
@@ -74,14 +73,12 @@
   // 초대 링크는 ?code=XXXX 형태다. GitHub Pages는 정적 호스팅이라 /join/XXXX 경로 라우팅을
   // 할 수 없어서 쿼리스트링을 쓴다.
   var code = new URLSearchParams(location.search).get('code');
-  var codeEl = document.getElementById('code');
   var openEl = document.getElementById('openApp');
   if (code) {
-    codeEl.textContent = code;
     openEl.href = 'offcourse://invite/' + encodeURIComponent(code);
   } else {
-    codeEl.textContent = '코드 없음';
-    openEl.style.display = 'none';
+    openEl.hidden = true;
+    document.getElementById('notice').hidden = false;
   }
 </script>
 </body>
