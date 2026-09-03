@@ -43,3 +43,15 @@ th { background: var(--surface); font-weight: 600; }
   color: #6B5518;
 }
 footer { margin-top: 48px; color: var(--text-soft); font-size: 0.8rem; }
+
+.btn-row { margin: 0 0 8px; }
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 10px;
+}
+.btn:hover { opacity: 0.9; }
